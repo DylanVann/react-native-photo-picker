@@ -125,7 +125,7 @@ class ImagePicker extends Component {
     this.setState({
       fetching: true,
       albumPickerVisible: false,
-      albumTitle: album.title || this.props.formatAllPhotosTitle(),
+      albumTitle: album.title || this.props.strings.allPhotos(),
       sections: {},
       selectedCount: 0,
       photosCount: 0,
@@ -245,21 +245,7 @@ class ImagePicker extends Component {
       onCompleted,
       renderNavBar,
       renderAlbumNavBar,
-      // NavBar.
-      formatAllPhotosTitle,
-      formatSelected,
-      formatComplete,
-      formatCancel,
-      // Footer.
-      formatPhotosCount,
-      formatVideosCount,
-      formatCount,
-      formatLoading,
-      formatNoPhotos,
-      // Album.
-      formatAlbumSelectionCancel,
-      formatAlbumSelectionTitle,
-      formatChangePromptText,
+      strings,
       tintColor,
     } = this.props
     const {
@@ -292,8 +278,8 @@ class ImagePicker extends Component {
         }}
       >
         <AlbumPickerModal
-          title={formatAlbumSelectionTitle()}
-          cancelText={formatAlbumSelectionCancel()}
+          title={strings.selectAlbumPrompt()}
+          cancelText={strings.cancel()}
           visible={albumPickerVisible}
           albums={albums}
           onSelected={(album) => {
@@ -302,20 +288,17 @@ class ImagePicker extends Component {
           }}
           onCancelled={this.onAlbumSelectionCancelled}
           renderAlbumNavBar={renderAlbumNavBar}
-          allPhotosTitle={formatAllPhotosTitle()}
+          allPhotosTitle={strings.allPhotos()}
           tintColor={tintColor}
         />
         { renderNavBar({
           selectedCount,
           albumTitle,
           onCancelled,
-          formatSelected,
-          cancelText: formatCancel(),
-          completeText: formatComplete(),
           onCompleted: () => onCompleted(selectedImages),
           onAlbumSelectionStarted: () => this.onAlbumSelectionStarted(),
           tintColor,
-          changePromptText: formatChangePromptText(),
+          strings,
         }) }
         <MutableListView
           style={styles.container}
@@ -338,6 +321,7 @@ class ImagePicker extends Component {
                 width={width}
                 selectedAll={selectedAll}
                 tintColor={tintColor}
+                strings={strings}
               />
             )
           }}
@@ -359,11 +343,7 @@ class ImagePicker extends Component {
                 photosCount,
                 videosCount,
                 error,
-                formatPhotosCount,
-                formatVideosCount,
-                formatCount,
-                formatLoading,
-                formatNoPhotos,
+                strings,
               }}
               loading={fetching}
               style={{ width }}
@@ -381,21 +361,6 @@ ImagePicker.propTypes = {
   onCancelled: PropTypes.func.isRequired,
   onCompleted: PropTypes.func.isRequired,
   tintColor: PropTypes.string,
-  // NavBar strings.
-  formatAllPhotosTitle: PropTypes.func,
-  formatSelected: PropTypes.func,
-  formatCancel: PropTypes.func,
-  formatComplete: PropTypes.func,
-  // Album selection strings.
-  formatAlbumSelectionCancel: PropTypes.func,
-  formatAlbumSelectionTitle: PropTypes.func,
-  formatChangePromptText: PropTypes.func,
-  // Footer strings.
-  formatPhotosCount: PropTypes.func,
-  formatVideosCount: PropTypes.func,
-  formatCount: PropTypes.func,
-  formatLoading: PropTypes.func,
-  formatNoPhotos: PropTypes.func,
   // Sort the images by timeStamp.
   getSectionHeader: PropTypes.func,
   renderNavBar: PropTypes.func,
@@ -404,23 +369,23 @@ ImagePicker.propTypes = {
 }
 
 ImagePicker.defaultProps = {
+  strings: {
+    complete: () => 'upload',
+    allPhotos: () => 'All Photos',
+    selected: count => `${count} Selected`,
+    cancel: () => 'Cancel',
+    complete: () => 'Upload',
+    selectAlbumPrompt: () => 'Select an Album',
+    changeAlbum: () => 'Tap to Change',
+    countPhotos: count => `${count} Photos`,
+    countVideos: count => `${count} Videos`,
+    count: (photos, videos) => `${photos} Photos, ${videos} Videos`,
+    loading: () => 'Loading...',
+    noPhotos: () => 'No Photos.',
+    selectAll: () => 'Select All',
+    deselect: () => 'Deselect',
+  },
   imagesPerFetch: Platform.select({ ios: 50, android: 10 }),
-  // NavBar strings.
-  formatAllPhotosTitle: () => 'All Photos',
-  formatSelected: count => `${count} Selected`,
-  formatCancel: () => 'Cancel',
-  formatComplete: () => 'Upload',
-  // Album selection strings.
-  formatAlbumSelectionCancel: () => 'Cancel',
-  formatAlbumSelectionTitle: () => 'Select an Album',
-  formatChangePromptText: () => 'Tap to Change',
-  // Footer strings.
-  formatPhotosCount: count => `${count} Photos`,
-  formatVideosCount: count => `${count} Videos`,
-  formatCount: (photos, videos) => `${photos} Photos, ${videos} Videos`,
-  formatLoading: () => 'Loading...',
-  formatNoPhotos: () => 'No Photos.',
-  // List props.
   imagesPerRow: 4,
   initialListSize: 6 * 4,
   renderNavBar: ImagePickerNavBar,

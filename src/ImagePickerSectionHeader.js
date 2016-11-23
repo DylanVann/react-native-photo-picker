@@ -28,19 +28,14 @@ const styles = StyleSheet.create({
   },
 })
 
-const getText = (selectedAll) => {
-  if (selectedAll) return 'Deselect All'
-  return 'Select All'
-}
-
-const SectionHeader = ({ title, style, width, selectedAll, onSelectAll, tintColor }) =>
+const SectionHeader = ({ title, style, width, selectedAll, onSelectAll, tintColor, strings }) =>
   <View style={[styles.container, { width }, style]}>
     <Text style={styles.date}>
       { title }
     </Text>
     <TouchableOpacity style={styles.selectAllButton} onPress={onSelectAll}>
       <Text style={[styles.selectAll, { color: tintColor }]}>
-        { getText(selectedAll) }
+        { selectedAll ? strings.deselect() : strings.selectAll() }
       </Text>
     </TouchableOpacity>
   </View>
@@ -52,6 +47,7 @@ SectionHeader.propTypes = {
   style: View.propTypes.style,
   title: PropTypes.string,
   tintColor: PropTypes.string,
+  strings: PropTypes.object,
 }
 
 export default SectionHeader

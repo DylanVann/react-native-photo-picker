@@ -12,21 +12,19 @@ const styles = StyleSheet.create({
   },
 })
 
-const getText = (formatCount,
-                 photosCount,
-                 formatPhotosCount,
-                 videosCount,
-                 formatVideosCount,
-                 loading,
-                 formatLoading,
-                 formatNoPhotos,
-                 error) => {
+const getText = ({
+  photosCount,
+  videosCount,
+  loading,
+  error,
+  strings
+}) => {
   if (error) return error
-  if (loading) return formatLoading()
-  if (!photosCount && !videosCount) return formatNoPhotos()
-  if (!photosCount) return formatVideosCount(videosCount)
-  if (!videosCount) return formatPhotosCount(photosCount)
-  return formatCount(photosCount, videosCount)
+  if (loading) return strings.loading()
+  if (!photosCount && !videosCount) return strings.noPhotos()
+  if (!photosCount) return strings.countVideos(videosCount)
+  if (!videosCount) return strings.countPhotos(photosCount)
+  return strings.count(photosCount, videosCount)
 }
 
 const Footer = ({
@@ -35,24 +33,15 @@ const Footer = ({
   videosCount,
   loading,
   error,
-  formatPhotosCount,
-  formatVideosCount,
-  formatCount,
-  formatLoading,
-  formatNoPhotos,
+  strings,
 }) =>
   <Text style={[styles.container, style]} multiline>
-    {getText(
-      formatCount,
+    {getText({
       photosCount,
-      formatPhotosCount,
-      videosCount,
-      formatVideosCount,
       loading,
-      formatLoading,
-      formatNoPhotos,
       error,
-    )}
+      strings,
+    })}
   </Text>
 
 Footer.propTypes = {
@@ -60,15 +49,7 @@ Footer.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.string,
   photosCount: PropTypes.number,
-  videosCount: PropTypes.number,
-  formatPhotosCount: PropTypes.func,
-  formatVideosCount: PropTypes.func,
-  formatCount: PropTypes.func,
-  formatLoading: PropTypes.func,
-  formatNoPhotos: PropTypes.func,
-}
-
-Footer.defaultPropTypes = {
+  strings: PropTypes.object,
 }
 
 export default Footer

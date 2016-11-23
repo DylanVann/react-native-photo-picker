@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Title = ({ title, onPress, changePromptText }) =>
+const Title = ({ title, onPress, strings }) =>
   <TouchableOpacity onPress={onPress}>
     <View style={styles.titleContainer}>
       <Text style={styles.title}>
@@ -35,13 +35,14 @@ const Title = ({ title, onPress, changePromptText }) =>
       </View>
     </View>
     <Text style={styles.changeAlbumButton}>
-      { changePromptText }
+      { strings.selectAlbumPrompt() }
     </Text>
   </TouchableOpacity>
 
 Title.propTypes = {
   title: PropTypes.string,
   onPress: PropTypes.func,
+  strings: PropTypes.object,
 }
 
 const ImagePickerNavBar = ({
@@ -49,28 +50,25 @@ const ImagePickerNavBar = ({
   albumTitle,
   onCancelled,
   onCompleted,
-  formatSelected,
   onAlbumSelectionStarted,
-  completeText,
-  cancelText,
   tintColor,
-  changePromptText,
+  strings,
 }) => {
   const titleValue = !selectedCount
     ?
     (<Title
       title={albumTitle}
-      changePromptText={changePromptText}
       onPress={onAlbumSelectionStarted}
+      strings={strings}
     />)
-    : { title: formatSelected(selectedCount) }
+    : { title: strings.selected(selectedCount) }
   const rightButton = {
-    title: completeText,
+    title: strings.complete(),
     handler: selectedCount ? onCompleted : Function.prototype,
     tintColor: selectedCount ? tintColor : '#bbb',
   }
   const leftButton = {
-    title: cancelText,
+    title: strings.cancel(),
     handler: onCancelled,
     tintColor,
   }
