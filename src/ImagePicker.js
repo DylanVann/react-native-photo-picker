@@ -294,7 +294,7 @@ class ImagePicker extends Component {
           selectedCount,
           albumTitle,
           onCancelled,
-          onCompleted: () => onCompleted(selectedImages),
+          onCompleted: () => onCompleted(selectedImages.toArray()),
           onAlbumSelectionStarted: () => this.onAlbumSelectionStarted(),
           tintColor,
           strings,
