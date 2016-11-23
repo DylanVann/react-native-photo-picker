@@ -175,7 +175,7 @@ class ImagePicker extends Component {
   }
 
   getAlbums = () => {
-    CameraRoll.getAlbums({ prepareForSizeDisplay: this.getImageDimensions() })
+    CameraRoll.getAlbums({ prepareForSizeDisplay: this.getImageDimensions(this.state.width) })
     .then((albums) => {
       this.setState({
         albums,
@@ -195,7 +195,7 @@ class ImagePicker extends Component {
       after: this.after,
       first: photosPerFetch,
       // iOS only.
-      prepareForSizeDisplay: this.getImageDimensions(),
+      prepareForSizeDisplay: this.getImageDimensions(this.state.width),
     }
     CameraRoll.getPhotos(this.album, fetchOptions)
     .then((data) => {
