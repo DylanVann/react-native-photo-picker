@@ -82,6 +82,7 @@ Thumbnail.propTypes = {
   height: PropTypes.number,
   isVideo: PropTypes.bool,
   onPress: PropTypes.func,
+  tintColor: PropTypes.string,
 }
 
 export default Thumbnail
