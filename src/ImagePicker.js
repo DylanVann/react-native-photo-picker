@@ -298,7 +298,6 @@ class ImagePicker extends Component {
         <AlbumPickerModal
           title={formatAlbumSelectionTitle()}
           cancelText={formatAlbumSelectionCancel()}
-          changePromptText={formatChangePromptText()}
           visible={albumPickerVisible}
           albums={albums}
           onSelected={(album) => {
@@ -320,6 +319,7 @@ class ImagePicker extends Component {
           onCompleted: () => onCompleted(selectedImages),
           onAlbumSelectionStarted: () => this.onAlbumSelectionStarted(),
           tintColor,
+          changePromptText: formatChangePromptText(),
         }) }
         <MutableListView
           style={styles.container}
