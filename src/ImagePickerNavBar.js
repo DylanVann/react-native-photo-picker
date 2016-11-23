@@ -35,7 +35,7 @@ const Title = ({ title, onPress, strings }) =>
       </View>
     </View>
     <Text style={styles.changeAlbumButton}>
-      { strings.selectAlbumPrompt() }
+      { strings.startSelectAlbumPrompt() }
     </Text>
   </TouchableOpacity>
 

@@ -278,8 +278,6 @@ class ImagePicker extends Component {
         }}
       >
         <AlbumPickerModal
-          title={strings.selectAlbumPrompt()}
-          cancelText={strings.cancel()}
           visible={albumPickerVisible}
           albums={albums}
           onSelected={(album) => {
@@ -290,6 +288,7 @@ class ImagePicker extends Component {
           renderAlbumNavBar={renderAlbumNavBar}
           allPhotosTitle={strings.allPhotos()}
           tintColor={tintColor}
+          strings={strings}
         />
         { renderNavBar({
           selectedCount,
@@ -375,8 +374,8 @@ ImagePicker.defaultProps = {
     selected: count => `${count} Selected`,
     cancel: () => 'Cancel',
     complete: () => 'Upload',
+    startSelectAlbumPrompt: () => 'Tap to Change',
     selectAlbumPrompt: () => 'Select an Album',
-    changeAlbum: () => 'Tap to Change',
     countPhotos: count => `${count} Photos`,
     countVideos: count => `${count} Videos`,
     count: (photos, videos) => `${photos} Photos, ${videos} Videos`,

@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react'
 import NavBar from './NavBar'
 
-const AlbumPickerNavBar = ({ onCancelled, title, cancelText, tintColor }) => {
+const AlbumPickerNavBar = ({ onCancelled, strings, tintColor }) => {
   const leftButton = {
-    title: cancelText,
+    title: strings.cancel(),
     handler: onCancelled,
     tintColor,
   }
   return (
     <NavBar
-      title={{ title }}
+      title={{ title: strings.selectAlbumPrompt() }}
       leftButton={leftButton}
     />
   )
@@ -17,9 +17,8 @@ const AlbumPickerNavBar = ({ onCancelled, title, cancelText, tintColor }) => {
 
 AlbumPickerNavBar.propTypes = {
   onCancelled: PropTypes.func.isRequired,
-  title: PropTypes.string,
-  cancelText: PropTypes.string,
   tintColor: PropTypes.string,
+  strings: PropTypes.object,
 }
 
 export default AlbumPickerNavBar
