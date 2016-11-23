@@ -212,9 +212,9 @@ class ImagePicker extends Component {
         ({ ...image, selected })),
     }
     this.selectedImages = this.selectedImages.withMutations((map) => {
-      section.forEach(image => selected
-        ? map.set(image.id, image)
-        : map.delete(image.id, image),
+      section.forEach(img => selected
+        ? map.set(img.id, img)
+        : map.delete(img.id, img),
       )
     })
     this.setState({
@@ -229,8 +229,8 @@ class ImagePicker extends Component {
       ...this.sections,
       [sectionId]: this.sections[sectionId].map((img, idx) =>
         idx === parseInt(rowId, 10)
-          ? { ...image, selected: !image.selected }
-          : image),
+          ? { ...img, selected: !img.selected }
+          : img),
     }
     this.selectedImages = selected
       ? this.selectedImages.set(image.id, image)
@@ -284,16 +284,14 @@ class ImagePicker extends Component {
       isLeft(i) ? styles.imageLeft :
         isRight(i) ? styles.imageRight :
           styles.image
-    let scrollView
     return (
       <View
         style={styles.container}
-        onLayout={({ nativeEvent: { layout: { width: newWidth, height } } }) =>
+        onLayout={({ nativeEvent: { layout: { width: newWidth, height } } }) => {
           this.setState({
             width: newWidth,
-            height,
           })
-        }
+        }}
       >
         <AlbumPickerModal
           title={formatAlbumSelectionTitle()}
@@ -301,8 +299,8 @@ class ImagePicker extends Component {
           visible={albumPickerVisible}
           albums={albums}
           onSelected={(album) => {
+            this.scrollView.list.scrollTo({ y: 0, animated: false })
             this.onAlbumSelected(album)
-            scrollView.scrollTo({ y: 0, animated: false })
           }}
           onCancelled={this.onAlbumSelectionCancelled}
           renderAlbumNavBar={renderAlbumNavBar}
@@ -321,8 +319,11 @@ class ImagePicker extends Component {
         <MutableListView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
-          ref={e => (scrollView = e)}
+          ref={e => {
+            this.scrollView = e
+          }}
           data={sections}
+          key={width}
           rowsAndSections
           onEndReached={this.getPhotos}
           enableEmptySections
@@ -420,7 +421,7 @@ ImagePicker.defaultProps = {
   formatNoPhotos: () => 'No Photos.',
   // List props.
   imagesPerRow: 4,
-  initialListSize: 6,
+  initialListSize: 6 * 4,
   renderNavBar: ImagePickerNavBar,
   renderAlbumNavBar: AlbumPickerNavBar,
   renderFooter: Footer,

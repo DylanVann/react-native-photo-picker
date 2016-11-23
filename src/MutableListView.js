@@ -8,12 +8,12 @@ import { ListView } from 'react-native'
 class MutableListView extends Component {
   constructor(props) {
     super(props)
+    const { data, rowsAndSections, rowHasChanged, sectionHeaderHasChanged } = props
     const dataSource = new ListView.DataSource({
-      sectionHeaderHasChanged: (a, b) => a !== b,
-      rowHasChanged: (a, b) => a !== b,
+      sectionHeaderHasChanged,
+      rowHasChanged,
     })
     this.state = {}
-    const { data, rowsAndSections } = props
     this.state.dataSource = rowsAndSections ?
       dataSource.cloneWithRowsAndSections(data) :
       dataSource.cloneWithRows(data)
@@ -34,7 +34,7 @@ class MutableListView extends Component {
     }
     const { listComponent } = this.props
     const ListComponent = listComponent || ListView
-    return <ListComponent dataSource={this.state.dataSource} {...props} />
+    return <ListComponent ref={e => this.list = e} dataSource={this.state.dataSource} {...props} />
   }
 }
 
@@ -43,12 +43,14 @@ MutableListView.propTypes = {
     PropTypes.object,
     PropTypes.array,
   ]).isRequired,
-  listComponent: PropTypes.node,
+  listComponent: PropTypes.func,
   rowsAndSections: PropTypes.bool,
 }
 
-MutableListView.defaultPropTypes = {
+MutableListView.defaultProps = {
   listComponent: ListView,
+  sectionHeaderHasChanged: (a, b) => a !== b,
+  rowHasChanged: (a, b) => a !== b,
 }
 
 export default MutableListView
