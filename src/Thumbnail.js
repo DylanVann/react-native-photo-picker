@@ -43,12 +43,16 @@ const VideoOverlay = () =>
 
 const SelectedOverlay = ({ tintColor }) =>
   <View style={styles.overlay}>
-    <View style={[styles.imageOverlay, { backGroundColor: tintColor }]} />
+    <View style={[styles.imageOverlay, { backgroundColor: tintColor }]} />
     <Image
       style={styles.check}
       source={require('./assets/check.png')}
     />
   </View>
+
+SelectedOverlay.propTypes = {
+  tintColor: PropTypes.string,
+}
 
 const Thumbnail = ({
   uri,
