@@ -1,0 +1,31 @@
+{
+  "name": "react-native-photo-picker",
+  "version": "0.0.1",
+  "description": "A photo picker written in react-native.",
+  "main": "index.js",
+  "author": "Dylan Vann <dylan.vann@gmail.com>",
+  "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb": "latest",
+    "eslint-plugin-import": "^2.1.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.6.0"
+  },
+  "peerDependencies": {
+    "react": "^15.4.1",
+    "react-native": "^0.37.0"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "moment": "^2.17.0",
+    "react-native-camera-roll": "^0.0.14",
+    "react-native-navbar": "^1.5.4",
+    "react-native-triangle": "^0.0.6"
+  }
+}

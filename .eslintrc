@@ -1,0 +1,70 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [
+          ".js"
+        ]
+      }
+    ],
+    "react/forbid-prop-types": 0,
+    "no-nested-ternary": 0,
+    "no-underscore-dangle": 0,
+    "no-unsafe-finally": 0,
+    "semi": [
+      "error",
+      "never"
+    ],
+    "new-cap": 0,
+    "no-param-reassign": 0,
+    "no-confusing-arrow": 0,
+    "no-bitwise": [
+      2,
+      {
+        "int32Hint": true
+      }
+    ],
+    "no-unused-expressions": 0,
+    "no-cond-assign": [
+      2,
+      "except-parens"
+    ],
+    "global-require": 0,
+    "no-extra-parens": [
+      2,
+      "functions"
+    ],
+    "generator-star-spacing": 0,
+    "no-constant-condition": [
+      "error",
+      {
+        "checkLoops": false
+      }
+    ],
+    "import/no-unresolved": ["error", { "ignore": ["react-native", "react"] }],
+    "import/prefer-default-export": 0,
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "settings": {
+    "import/core-modules": ["react-native", "react"],
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          "",
+          ".js",
+          ".ios.js",
+          ".android.js"
+        ]
+      }
+    }
+  }
+}
