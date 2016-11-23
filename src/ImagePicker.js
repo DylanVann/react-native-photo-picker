@@ -261,6 +261,10 @@ class ImagePicker extends Component {
       formatAlbumSelectionTitle,
       formatChangePromptText,
       tintColor,
+      renderSectionHeader,
+      renderRow,
+      renderFooter,
+      renderAlbumRow,
     } = this.props
     const {
       albumPickerVisible,
@@ -301,6 +305,7 @@ class ImagePicker extends Component {
             this.onAlbumSelected(album)
           }}
           onCancelled={this.onAlbumSelectionCancelled}
+          renerAlbumRow={renderAlbumRow}
           renderAlbumNavBar={renderAlbumNavBar}
           allPhotosTitle={formatAllPhotosTitle()}
           tintColor={tintColor}
@@ -331,43 +336,39 @@ class ImagePicker extends Component {
           initialListSize={initialListSize}
           renderSectionHeader={(data, title) => {
             const selectedAll = data.filter(image => image.selected).length === data.length
-            return (
-              <Header
-                title={title}
-                onSelectAll={() => this.selectedSection(data, selectedAll, title)}
-                width={width}
-                selectedAll={selectedAll}
-                tintColor={tintColor}
-              />
-            )
+            return renderSectionHeader({
+              title,
+              onSelectAll: () => this.selectedSection(data, selectedAll, title),
+              width,
+              selectedAll,
+              tintColor,
+            })
           }}
           renderRow={(image, sectionId, rowId) =>
-            <Thumbnail
-              uri={image.uri}
-              onPress={() => this.selectedPhoto(image, sectionId, rowId)}
-              selected={image.selected}
-              width={imageSize.width}
-              height={imageSize.height}
-              style={getImageStyle(parseInt(rowId, 10))}
-              isVideo={image.isVideo}
-              tintColor={tintColor}
-            />
+            renderRow({
+              uri: image.uri,
+              onPress: () => this.selectedPhoto(image, sectionId, rowId),
+              selected: image.selected,
+              width: imageSize.width,
+              height: imageSize.height,
+              style: getImageStyle(parseInt(rowId, 10)),
+              isVideo: image.isVideo,
+              tintColor,
+            })
           }
           renderFooter={() =>
-            <Footer
-              {...{
-                photosCount,
-                videosCount,
-                error,
-                formatPhotosCount,
-                formatVideosCount,
-                formatCount,
-                formatLoading,
-                formatNoPhotos,
-              }}
-              loading={fetching}
-              style={{ width }}
-            />
+            renderFooter({
+              photosCount,
+              videosCount,
+              error,
+              formatPhotosCount,
+              formatVideosCount,
+              formatCount,
+              formatLoading,
+              formatNoPhotos,
+              loading: fetching,
+              style: { width },
+            })
           }
         />
       </View>
@@ -400,6 +401,10 @@ ImagePicker.propTypes = {
   getSectionHeader: PropTypes.func,
   renderNavBar: PropTypes.func,
   renderAlbumNavBar: PropTypes.func,
+  renderSectionHeader: PropTypes.func,
+  renderRow: PropTypes.func,
+  renderFooter: PropTypes.func,
+  renderAlbumRow: PropTypes.func,
   imagesPerFetch: PropTypes.number,
 }
 
@@ -425,6 +430,8 @@ ImagePicker.defaultProps = {
   initialListSize: 6 * 4,
   renderNavBar: ImagePickerNavBar,
   renderAlbumNavBar: AlbumPickerNavBar,
+  renderSectionHeader: Header,
+  renderRow: Thumbnail,
   renderFooter: Footer,
   tintColor: 'blue',
   getSectionHeader,
