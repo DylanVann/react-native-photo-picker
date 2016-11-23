@@ -38,6 +38,7 @@ const Footer = ({
   <Text style={[styles.container, style]} multiline>
     {getText({
       photosCount,
+      videosCount,
       loading,
       error,
       strings,
