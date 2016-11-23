@@ -68,6 +68,7 @@ class ImagePicker extends Component {
       selectedCount: 0,
       photosCount: 0,
       videosCount: 0,
+      width: Dimensions.get('window').width,
     }
   }
 
@@ -148,8 +149,7 @@ class ImagePicker extends Component {
     })
   }
 
-  getImageDimensions = () => {
-    const { width } = Dimensions.get('window')
+  getImageDimensions = (width) => {
     const { imagesPerRow } = this.props
     const imageSize = (width - (margin * 2 * (imagesPerRow - 1))) / imagesPerRow
     return {
@@ -275,9 +275,9 @@ class ImagePicker extends Component {
       videosCount,
       photosCount,
       selectedImages,
+      width,
     } = this.state
-    const imageSize = this.getImageDimensions()
-    const { width } = Dimensions.get('window')
+    const imageSize = this.getImageDimensions(width)
     const isLeft = i => i % this.props.imagesPerRow === 0
     const isRight = i => (i + 1) % this.props.imagesPerRow === 0
     const getImageStyle = i =>
@@ -286,7 +286,15 @@ class ImagePicker extends Component {
           styles.image
     let scrollView
     return (
-      <View style={styles.container}>
+      <View
+        style={styles.container}
+        onLayout={({ nativeEvent: { layout: { width: newWidth, height } } }) =>
+          this.setState({
+            width: newWidth,
+            height,
+          })
+        }
+      >
         <AlbumPickerModal
           title={formatAlbumSelectionTitle()}
           cancelText={formatAlbumSelectionCancel()}
