@@ -34,7 +34,13 @@ class MutableListView extends Component {
     }
     const { listComponent } = this.props
     const ListComponent = listComponent || ListView
-    return <ListComponent ref={e => this.list = e} dataSource={this.state.dataSource} {...props} />
+    return (
+      <ListComponent
+        ref={e => (this.list = e)}
+        dataSource={this.state.dataSource}
+        {...props}
+      />
+    )
   }
 }
 
@@ -45,6 +51,8 @@ MutableListView.propTypes = {
   ]).isRequired,
   listComponent: PropTypes.func,
   rowsAndSections: PropTypes.bool,
+  sectionHeaderHasChanged: PropTypes.func,
+  rowHasChanged: PropTypes.func,
 }
 
 MutableListView.defaultProps = {

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Modal, StyleSheet } from 'react-native'
+import { Modal } from 'react-native'
 import ImagePicker from './ImagePicker'
 
 const ImagePickerModal = ({ visible, onCancelled, ...otherProps }) =>

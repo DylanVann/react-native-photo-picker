@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   },
   selectAll: {
     textAlign: 'right',
-    color: 'red',
   },
 })
 
@@ -34,13 +33,13 @@ const getText = (selectedAll) => {
   return 'Select All'
 }
 
-const SectionHeader = ({ title, style, width, selectedAll, onSelectAll }) =>
+const SectionHeader = ({ title, style, width, selectedAll, onSelectAll, tintColor }) =>
   <View style={[styles.container, { width }, style]}>
     <Text style={styles.date}>
       { title }
     </Text>
     <TouchableOpacity style={styles.selectAllButton} onPress={onSelectAll}>
-      <Text style={styles.selectAll}>
+      <Text style={[styles.selectAll, { color: tintColor }]}>
         { getText(selectedAll) }
       </Text>
     </TouchableOpacity>
@@ -52,6 +51,7 @@ SectionHeader.propTypes = {
   onSelectAll: PropTypes.func,
   style: View.propTypes.style,
   title: PropTypes.string,
+  tintColor: PropTypes.string,
 }
 
 export default SectionHeader

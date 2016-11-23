@@ -190,7 +190,7 @@ class ImagePicker extends Component {
     this.mounted && this.setState({
       fetching: true,
     })
-    const photosPerFetch = this.props.imagesPerRow * this.props.rowsPerFetch
+    const photosPerFetch = this.props.imagesPerFetch
     const fetchOptions = {
       after: this.after,
       first: photosPerFetch,
@@ -263,6 +263,8 @@ class ImagePicker extends Component {
       // Album.
       formatAlbumSelectionCancel,
       formatAlbumSelectionTitle,
+      formatChangePromptText,
+      tintColor,
     } = this.props
     const {
       albumPickerVisible,
@@ -287,7 +289,7 @@ class ImagePicker extends Component {
     return (
       <View
         style={styles.container}
-        onLayout={({ nativeEvent: { layout: { width: newWidth, height } } }) => {
+        onLayout={({ nativeEvent: { layout: { width: newWidth } } }) => {
           this.setState({
             width: newWidth,
           })
@@ -296,6 +298,7 @@ class ImagePicker extends Component {
         <AlbumPickerModal
           title={formatAlbumSelectionTitle()}
           cancelText={formatAlbumSelectionCancel()}
+          changePromptText={formatChangePromptText()}
           visible={albumPickerVisible}
           albums={albums}
           onSelected={(album) => {
@@ -305,6 +308,7 @@ class ImagePicker extends Component {
           onCancelled={this.onAlbumSelectionCancelled}
           renderAlbumNavBar={renderAlbumNavBar}
           allPhotosTitle={formatAllPhotosTitle()}
+          tintColor={tintColor}
         />
         { renderNavBar({
           selectedCount,
@@ -315,13 +319,12 @@ class ImagePicker extends Component {
           completeText: formatComplete(),
           onCompleted: () => onCompleted(selectedImages),
           onAlbumSelectionStarted: () => this.onAlbumSelectionStarted(),
+          tintColor,
         }) }
         <MutableListView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
-          ref={e => {
-            this.scrollView = e
-          }}
+          ref={e => (this.scrollView = e)}
           data={sections}
           key={width}
           rowsAndSections
@@ -338,6 +341,7 @@ class ImagePicker extends Component {
                 onSelectAll={() => this.selectedSection(data, selectedAll, title)}
                 width={width}
                 selectedAll={selectedAll}
+                tintColor={tintColor}
               />
             )
           }}
@@ -388,6 +392,7 @@ ImagePicker.propTypes = {
   // Album selection strings.
   formatAlbumSelectionCancel: PropTypes.func,
   formatAlbumSelectionTitle: PropTypes.func,
+  formatChangePromptText: PropTypes.func,
   // Footer strings.
   formatPhotosCount: PropTypes.func,
   formatVideosCount: PropTypes.func,
@@ -398,13 +403,11 @@ ImagePicker.propTypes = {
   getSectionHeader: PropTypes.func,
   renderNavBar: PropTypes.func,
   renderAlbumNavBar: PropTypes.func,
+  imagesPerFetch: PropTypes.number,
 }
 
 ImagePicker.defaultProps = {
-  rowsPerFetch: Platform.select({
-    ios: 50,
-    android: 10,
-  }),
+  imagesPerFetch: Platform.select({ ios: 50, android: 10 }),
   // NavBar strings.
   formatAllPhotosTitle: () => 'All Photos',
   formatSelected: count => `${count} Selected`,
@@ -413,6 +416,7 @@ ImagePicker.defaultProps = {
   // Album selection strings.
   formatAlbumSelectionCancel: () => 'Cancel',
   formatAlbumSelectionTitle: () => 'Select an Album',
+  formatChangePromptText: () => 'Tap to Change',
   // Footer strings.
   formatPhotosCount: count => `${count} Photos`,
   formatVideosCount: count => `${count} Videos`,
@@ -425,7 +429,7 @@ ImagePicker.defaultProps = {
   renderNavBar: ImagePickerNavBar,
   renderAlbumNavBar: AlbumPickerNavBar,
   renderFooter: Footer,
-  tintColor: 'red',
+  tintColor: 'blue',
   getSectionHeader,
 }
 
