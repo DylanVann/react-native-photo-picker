@@ -57,8 +57,6 @@ class ImagePicker extends Component {
     this.sections = {}
     this.selectedImages = new Map()
     this.imagesPerRow = props.imagesPerRow
-    this.getPhotos()
-    this.getAlbums()
     this.state = {
       fetching: true,
       albumPickerVisible: false,
@@ -70,14 +68,12 @@ class ImagePicker extends Component {
       videosCount: 0,
       width: Dimensions.get('window').width,
     }
+    this.getPhotos()
+    this.getAlbums()
   }
 
   componentDidMount() {
     this.mounted = true
-    // PhotosFramework.requestAuthorization().then((statusObj) => {
-    //   if(statusObj.isAuthorized) {
-    //   }
-    // });
   }
 
   componentWillUnmount() {
@@ -354,6 +350,7 @@ class ImagePicker extends Component {
               height={imageSize.height}
               style={getImageStyle(parseInt(rowId, 10))}
               isVideo={image.isVideo}
+              tintColor={tintColor}
             />
           }
           renderFooter={() =>

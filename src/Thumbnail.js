@@ -31,9 +31,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     opacity: 0.4,
   },
-  selected: {
-    backgroundColor: 'red',
-  },
 })
 
 const VideoOverlay = () =>
@@ -44,9 +41,9 @@ const VideoOverlay = () =>
     />
   </View>
 
-const SelectedOverlay = () =>
+const SelectedOverlay = ({ tintColor }) =>
   <View style={styles.overlay}>
-    <View style={[styles.imageOverlay, styles.selected]} />
+    <View style={[styles.imageOverlay, { backGroundColor: tintColor }]} />
     <Image
       style={styles.check}
       source={require('./assets/check.png')}
@@ -62,7 +59,7 @@ const Thumbnail = ({
   width,
   height,
 }) =>
-  <View style={[style, { width, height }]}>
+  <View style={[style, { width, height }, tintColor]}>
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.thumbnail}>
         <Image
@@ -71,7 +68,7 @@ const Thumbnail = ({
           style={[{ width, height }]}
         />
         { isVideo && <VideoOverlay /> }
-        { selected && <SelectedOverlay /> }
+        { selected && <SelectedOverlay tintColor={tintColor} /> }
       </View>
     </TouchableWithoutFeedback>
   </View>
