@@ -58,8 +58,9 @@ const Thumbnail = ({
   onPress,
   width,
   height,
+  tintColor,
 }) =>
-  <View style={[style, { width, height }, tintColor]}>
+  <View style={[style, { width, height }]}>
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.thumbnail}>
         <Image
