@@ -56,12 +56,11 @@ class ImagePicker extends Component {
     this.images = new List()
     this.sections = {}
     this.selectedImages = new Map()
-    this.imagesPerRow = props.imagesPerRow
     this.state = {
       fetching: true,
       albumPickerVisible: false,
       albums: undefined,
-      albumTitle: '',
+      albumTitle: this.props.strings.defaultAlbum(),
       sections: {},
       selectedCount: 0,
       photosCount: 0,
@@ -125,7 +124,7 @@ class ImagePicker extends Component {
     this.setState({
       fetching: true,
       albumPickerVisible: false,
-      albumTitle: album.title || this.props.strings.allPhotos(),
+      albumTitle: album.title || this.props.strings.defaultAlbum(),
       sections: {},
       selectedCount: 0,
       photosCount: 0,
@@ -165,7 +164,7 @@ class ImagePicker extends Component {
       this.fetchingAlbum = false
       this.getPhotos()
       this.setState({
-        albumTitle: this.album.title || this.props.formatAllPhotosTitle(),
+        albumTitle: this.album.title || this.props.strings.defaultAlbum(),
       })
     })
   }
@@ -370,7 +369,7 @@ ImagePicker.propTypes = {
 ImagePicker.defaultProps = {
   strings: {
     complete: () => 'upload',
-    allPhotos: () => 'All Photos',
+    defaultAlbum: () => Platform.select({ ios: 'Camera Roll', android: 'All Photos' }),
     selected: count => `${count} Selected`,
     cancel: () => 'Cancel',
     complete: () => 'Upload',
