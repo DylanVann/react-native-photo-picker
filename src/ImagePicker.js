@@ -285,7 +285,7 @@ class ImagePicker extends Component {
           }}
           onCancelled={this.onAlbumSelectionCancelled}
           renderAlbumNavBar={renderAlbumNavBar}
-          allPhotosTitle={strings.allPhotos()}
+          allPhotosTitle={strings.defaultAlbum()}
           tintColor={tintColor}
           strings={strings}
         />
