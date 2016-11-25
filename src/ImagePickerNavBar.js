@@ -82,22 +82,13 @@ const ImagePickerNavBar = ({
 }
 
 ImagePickerNavBar.propTypes = {
-  formatSelected: PropTypes.func,
   selectedCount: PropTypes.number,
   albumTitle: PropTypes.string,
   onCancelled: PropTypes.func,
   onCompleted: PropTypes.func,
   onAlbumSelectionStarted: PropTypes.func,
   tintColor: PropTypes.string,
-  // Strings.
-  completeText: PropTypes.string,
-  cancelText: PropTypes.string,
-  changePromptText: PropTypes.string,
-}
-
-ImagePickerNavBar.defaultProps = {
-  albumTitle: '',
-  selectedCount: 0,
+  strings: PropTypes.object,
 }
 
 export default ImagePickerNavBar

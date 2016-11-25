@@ -257,7 +257,6 @@ class ImagePicker extends Component {
       selectedCount,
       videosCount,
       photosCount,
-      selectedImages,
       width,
     } = this.state
     const imageSize = this.getImageDimensions(width)
@@ -359,20 +358,19 @@ ImagePicker.propTypes = {
   onCancelled: PropTypes.func.isRequired,
   onCompleted: PropTypes.func.isRequired,
   tintColor: PropTypes.string,
-  // Sort the images by timeStamp.
   getSectionHeader: PropTypes.func,
   renderNavBar: PropTypes.func,
   renderAlbumNavBar: PropTypes.func,
   imagesPerFetch: PropTypes.number,
+  strings: PropTypes.object,
 }
 
 ImagePicker.defaultProps = {
   strings: {
-    complete: () => 'upload',
+    complete: () => 'Upload',
+    cancel: () => 'Cancel',
     defaultAlbum: () => Platform.select({ ios: 'Camera Roll', android: 'All Photos' }),
     selected: count => `${count} Selected`,
-    cancel: () => 'Cancel',
-    complete: () => 'Upload',
     startSelectAlbumPrompt: () => 'Tap to Change',
     selectAlbumPrompt: () => 'Select an Album',
     countPhotos: count => `${count} Photos`,

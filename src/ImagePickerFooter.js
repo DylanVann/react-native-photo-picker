@@ -17,7 +17,7 @@ const getText = ({
   videosCount,
   loading,
   error,
-  strings
+  strings,
 }) => {
   if (error) return error
   if (loading) return strings.loading()
@@ -49,6 +49,7 @@ Footer.propTypes = {
   style: View.propTypes.style,
   loading: PropTypes.bool,
   error: PropTypes.string,
+  videosCount: PropTypes.number,
   photosCount: PropTypes.number,
   strings: PropTypes.object,
 }
