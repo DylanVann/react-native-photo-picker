@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Modal } from 'react-native'
+import Permissions from 'react-native-permissions'
+
 import AlbumPicker from './AlbumPicker'
 
 const AlbumPickerModal = ({ visible, onCancelled, ...otherProps }) =>

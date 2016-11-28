@@ -51,6 +51,7 @@ Footer.propTypes = {
   error: PropTypes.string,
   videosCount: PropTypes.number,
   photosCount: PropTypes.number,
+  videosCount: PropTypes.number,
   strings: PropTypes.object,
 }
 

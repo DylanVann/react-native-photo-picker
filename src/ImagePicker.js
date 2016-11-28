@@ -357,37 +357,21 @@ ImagePicker.propTypes = {
   initialListSize: PropTypes.number,
   onCancelled: PropTypes.func.isRequired,
   onCompleted: PropTypes.func.isRequired,
-  tintColor: PropTypes.string,
   getSectionHeader: PropTypes.func,
   renderNavBar: PropTypes.func,
   renderAlbumNavBar: PropTypes.func,
   imagesPerFetch: PropTypes.number,
   strings: PropTypes.object,
+  tintColor: PropTypes.string,
 }
 
 ImagePicker.defaultProps = {
-  strings: {
-    complete: () => 'Upload',
-    cancel: () => 'Cancel',
-    defaultAlbum: () => Platform.select({ ios: 'Camera Roll', android: 'All Photos' }),
-    selected: count => `${count} Selected`,
-    startSelectAlbumPrompt: () => 'Tap to Change',
-    selectAlbumPrompt: () => 'Select an Album',
-    countPhotos: count => `${count} Photos`,
-    countVideos: count => `${count} Videos`,
-    count: (photos, videos) => `${photos} Photos, ${videos} Videos`,
-    loading: () => 'Loading...',
-    noPhotos: () => 'No Photos.',
-    selectAll: () => 'Select All',
-    deselect: () => 'Deselect',
-  },
   imagesPerFetch: Platform.select({ ios: 50, android: 10 }),
   imagesPerRow: 4,
   initialListSize: 6 * 4,
   renderNavBar: ImagePickerNavBar,
   renderAlbumNavBar: AlbumPickerNavBar,
   renderFooter: Footer,
-  tintColor: 'blue',
   getSectionHeader,
 }
 
