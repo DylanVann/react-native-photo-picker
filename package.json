@@ -1,6 +1,6 @@
 {
   "name": "react-native-photo-picker",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A photo picker written in react-native.",
   "license": "MIT",
   "author": "Dylan Vann <dylan.vann@gmail.com>",
