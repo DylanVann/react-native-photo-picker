@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native'
 import NavBar from './AuthorizationPromptNavBar'
 
 const styles = StyleSheet.create({
@@ -23,11 +23,14 @@ const AuthorizationPrompt = ({ onCancelled, strings, tintColor, onRequestAuthori
       <Text style={styles.promptStyle}>
         {strings.enablePhotosPrompt()}
       </Text>
-      <TouchableOpacity onPress={onRequestAuthorization}>
-        <Text style={{ color: tintColor }}>
-          {strings.enablePhotosButtonText()}
-        </Text>
-      </TouchableOpacity>
+      {/* Only render this button on iOS, we don't have a way to link to android settings yet. */}
+      {Platform.OS === 'ios' && (
+        <TouchableOpacity onPress={onRequestAuthorization}>
+          <Text style={{ color: tintColor }}>
+            {strings.enablePhotosButtonText()}
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   </View>
 
