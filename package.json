@@ -10,7 +10,6 @@
     "lint:fix": "eslint src --fix"
   },
   "dependencies": {
-    "react-native-camera-roll": "^0.0.20",
     "react-native-navbar": "^1.5.4",
     "react-native-triangle": "^0.0.6"
   },
@@ -25,6 +24,7 @@
   "peerDependencies": {
     "immutable": "^3.x",
     "moment": "^2.x",
+    "react-native-camera-roll": "^0.0.20",
     "react-native-permissions": "^0.2.5"
   }
 }
