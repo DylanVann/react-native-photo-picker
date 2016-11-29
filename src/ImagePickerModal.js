@@ -28,7 +28,14 @@ class ImagePickerModal extends Component {
       const hasAccess = ['authorized', 'restricted'].includes(response)
       this.setState({ hasAccess })
       // If we haven't got access direct the user to the settings page.
-      if (!hasAccess) Linking.openURL('app-settings:')
+      if (!hasAccess) {
+        const appSettingsURL = 'app-settings:'
+        Linking.canOpenURL(appSettingsURL).then((supported) => {
+          if (supported) {
+            Linking.openURL(appSettingsURL)
+          }
+        })
+      }
     })
   }
 
