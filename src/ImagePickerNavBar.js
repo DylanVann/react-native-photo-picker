@@ -5,6 +5,10 @@ import Triangle from 'react-native-triangle'
 import NavBar from './NavBar'
 
 const styles = StyleSheet.create({
+  titleButton: {
+    width: 165,
+    alignItems: 'center',
+  },
   changeAlbumButton: {
     fontSize: 10,
     color: '#bbb',
@@ -25,9 +29,9 @@ const styles = StyleSheet.create({
 })
 
 const Title = ({ title, onPress, strings }) =>
-  <TouchableOpacity onPress={onPress}>
+  <TouchableOpacity onPress={onPress} style={styles.titleButton}>
     <View style={styles.titleContainer}>
-      <Text style={styles.title}>
+      <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
         {title}
       </Text>
       <View style={styles.titleTriangle}>

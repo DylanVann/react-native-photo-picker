@@ -39,7 +39,7 @@ const Row = ({ uri, title, count, onPress }) =>
       style={styles.thumbnail}
     />
     <View style={styles.textContainer}>
-      <Text style={styles.rowTitle}>{title}</Text>
+      <Text style={styles.rowTitle} numberOfLines={1} ellipsizeMode="tail">{title}</Text>
       <Text>{count}</Text>
     </View>
   </TouchableOpacity>
