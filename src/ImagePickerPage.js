@@ -43,35 +43,26 @@ class ImagePickerModal extends Component {
     const { hasAccess } = this.state
     const {
       onCancelled,
-      visible,
       ...otherProps
     } = this.props
-    return (
-      <Modal
-        animationType={'slide'}
-        transparent={false}
-        visible={visible}
-        onRequestClose={onCancelled}
-      >
-        { hasAccess ? (
-          <ImagePicker
-            onCancelled={onCancelled}
-            {...otherProps}
-          />
-        ) : (
-          <ImagePickerAuthorizationPrompt
-            onRequestAuthorization={() => this.onRequestAuthorization()}
-            onCancelled={onCancelled}
-            {...otherProps}
-          />
-        )}
-      </Modal>
+    return (hasAccess ?
+      (
+        <ImagePicker
+          onCancelled={onCancelled}
+          {...otherProps}
+        />
+      ) : (
+        <ImagePickerAuthorizationPrompt
+          onCancelled={onCancelled}
+          onRequestAuthorization={this.onRequestAuthorization}
+          {...otherProps}
+        />
+      )
     )
   }
 }
 
 ImagePickerModal.propTypes = {
-  visible: PropTypes.bool,
   onCancelled: PropTypes.func.isRequired,
   tintColor: PropTypes.string,
   strings: PropTypes.object,

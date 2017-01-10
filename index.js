@@ -1,3 +1,3 @@
-import ImagePickerModal from './src/ImagePickerModal'
+import ImagePicker from './src/ImagePickerPage'
 
-export default ImagePickerModal
+export default ImagePicker

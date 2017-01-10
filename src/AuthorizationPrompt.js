@@ -5,6 +5,7 @@ import NavBar from './AuthorizationPromptNavBar'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   contentContainer: {
     flex: 1,
