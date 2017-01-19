@@ -24,7 +24,7 @@
   "peerDependencies": {
     "immutable": "^3.x",
     "moment": "^2.x",
-    "react-native-camera-roll": "^0.0.25",
+    "react-native-camera-roll": "^0.0.26",
     "react-native-permissions": "^0.2.x"
   }
 }
