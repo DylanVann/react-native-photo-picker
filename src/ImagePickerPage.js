@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { Modal, Platform, Linking } from 'react-native'
+import { Modal, Platform } from 'react-native'
 import Permissions from 'react-native-permissions'
 
 import ImagePicker from './ImagePicker'
@@ -29,10 +29,9 @@ class ImagePickerModal extends Component {
       this.setState({ hasAccess })
       // If we haven't got access direct the user to the settings page.
       if (!hasAccess) {
-        const appSettingsURL = 'app-settings:'
-        Linking.canOpenURL(appSettingsURL).then((supported) => {
-          if (supported) {
-            Linking.openURL(appSettingsURL)
+        Permissions.canOpenSettings().then((canOpenSettings) => {
+          if (canOpenSettings) {
+            Permissions.openSettings();
           }
         })
       }
