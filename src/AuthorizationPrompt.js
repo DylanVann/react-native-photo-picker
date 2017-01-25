@@ -24,14 +24,11 @@ const AuthorizationPrompt = ({ onCancelled, strings, tintColor, onRequestAuthori
       <Text style={styles.promptStyle}>
         {strings.enablePhotosPrompt()}
       </Text>
-      {/* Only render this button on iOS, we don't have a way to link to android settings yet. */}
-      {Platform.OS === 'ios' && (
-        <TouchableOpacity onPress={onRequestAuthorization}>
-          <Text style={{ color: tintColor }}>
-            {strings.enablePhotosButtonText()}
-          </Text>
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity onPress={onRequestAuthorization}>
+        <Text style={{ color: tintColor }}>
+          {strings.enablePhotosButtonText()}
+        </Text>
+      </TouchableOpacity>
     </View>
   </View>
 
