@@ -8,9 +8,8 @@ import {
 
 const styles = StyleSheet.create({
   container: {
-    height: 44,
-    paddingLeft: 10,
-    paddingRight: 10,
+    height: 18,
+    paddingLeft: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -21,7 +20,8 @@ const styles = StyleSheet.create({
   },
   selectAllButton: {
     justifyContent: 'center',
-    height: 44,
+    height: 18,
+    paddingRight: 5,
   },
   selectAll: {
     textAlign: 'right',
