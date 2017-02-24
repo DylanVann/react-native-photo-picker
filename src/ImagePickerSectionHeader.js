@@ -8,9 +8,8 @@ import {
 
 const styles = StyleSheet.create({
   container: {
-    height: 44,
-    paddingLeft: 10,
-    paddingRight: 10,
+    height: 18,
+    paddingLeft: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -21,19 +20,22 @@ const styles = StyleSheet.create({
   },
   selectAllButton: {
     justifyContent: 'center',
-    height: 44,
+    height: 18,
+    paddingRight: 5,
   },
   selectAll: {
     textAlign: 'right',
   },
 })
 
+const hitSlop = { bottom: 13, left: 13, right: 13, top: 13 }
+
 const SectionHeader = ({ title, style, width, selectedAll, onSelectAll, tintColor, strings }) =>
   <View style={[styles.container, { width }, style]}>
     <Text style={styles.date}>
       { title }
     </Text>
-    <TouchableOpacity style={styles.selectAllButton} onPress={onSelectAll}>
+    <TouchableOpacity style={styles.selectAllButton} onPress={onSelectAll} hitSlop={hitSlop}>
       <Text style={[styles.selectAll, { color: tintColor }]}>
         { selectedAll ? strings.deselect() : strings.selectAll() }
       </Text>
