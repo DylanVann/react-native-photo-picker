@@ -28,12 +28,14 @@ const styles = StyleSheet.create({
   },
 })
 
+const hitSlop = { bottom: 13, left: 13, right: 13, top: 13 }
+
 const SectionHeader = ({ title, style, width, selectedAll, onSelectAll, tintColor, strings }) =>
   <View style={[styles.container, { width }, style]}>
     <Text style={styles.date}>
       { title }
     </Text>
-    <TouchableOpacity style={styles.selectAllButton} onPress={onSelectAll}>
+    <TouchableOpacity style={styles.selectAllButton} onPress={onSelectAll} hitSlop={hitSlop}>
       <Text style={[styles.selectAll, { color: tintColor }]}>
         { selectedAll ? strings.deselect() : strings.selectAll() }
       </Text>
